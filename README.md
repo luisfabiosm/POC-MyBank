@@ -5,6 +5,7 @@ Uma API moderna e segura para operações bancárias, incluindo gerenciamento de
 ## 📑 Sumário
 
 - [Visão Geral](#visão-geral)
+- [Estrutura do Projeto](#estrutura-geral)
 - [Funcionalidades](#funcionalidades)
 - [Arquitetura](#arquitetura)
 - [Começando](#começando)
@@ -24,6 +25,52 @@ Uma API moderna e segura para operações bancárias, incluindo gerenciamento de
 
 A API Bancária é uma API RESTful baseada em .NET Core projetada para operações bancárias. Ela utiliza uma abordagem de arquitetura limpa com foco em princípios de design orientado a domínio para garantir manutenibilidade, testabilidade e escalabilidade.
 
+## Estrutura do Projeto
+
+A estrutura do projeto é organizada da seguinte forma:
+
+```
+/POC-MyBank
+│
+├── /src/MyBank
+│   ├── /Adapters
+│   │   ├── /Inbound
+│   │   │   └── /WebApi
+│   │   │       └── /Bank
+│   │   │           └── /Endpoints
+│   │   └── /Outbound
+│   │       ├── /Database
+│   │       └── /Logging
+│   ├── /Configurations
+│   ├── /Domain
+│   │   ├── /Core
+│   │   └── /Services
+│   └── /UseCases
+│       └── /Accounts
+│           └── /GetBalance
+│
+│
+├── .dockerignore
+├── .gitignore
+├── LICENSE
+└── README.md
+```
+### Descrição das Pastas
+
+- **/src/MyBank**: Contém a lógica principal da aplicação, incluindo serviços, entidades e casos de uso.
+  - **/Adapters**: Implementações de adaptadores que conectam a aplicação a diferentes interfaces externas, como APIs e bancos de dados.
+    - **/Inbound**: Adaptadores que recebem solicitações externas, como chamadas de API.
+    - **/Outbound**: Adaptadores que se comunicam com serviços externos, como bancos de dados e sistemas de logging.
+  - **/Configurations**: Contém as configurações da aplicação, como definições de ambiente, parâmetros de inicialização e injeções de dependência.
+  - **/Domain**: Contém a lógica de domínio da aplicação, incluindo entidades, serviços de domínio e exceções.
+  - **/UseCases**: Implementações de casos de uso que representam as operações que a aplicação pode realizar, organizadas por domínio.
+
+- **.dockerignore** e **.gitignore**: Arquivos de configuração para ignorar arquivos e pastas desnecessárias durante a construção de imagens Docker e commits no Git.
+
+- **LICENSE**: Arquivo que contém a licença do projeto.
+
+- **README.md**: Este arquivo, que contém informações sobre o projeto.
+
 ## ✨ Funcionalidades
 
 - **Autenticação e Autorização**: Autenticação segura baseada em JWT
@@ -33,6 +80,43 @@ A API Bancária é uma API RESTful baseada em .NET Core projetada para operaçõ
   - Gerenciamento de chaves PIX
   - Processamento instantâneo de pagamentos
 - **Documentação Swagger**: Documentação interativa da API
+
+## 🏗️ Fundamentos Utilizados
+
+### SOLID
+
+Os princípios SOLID são um conjunto de diretrizes que ajudam a criar sistemas de software mais compreensíveis, flexíveis e manuteníveis. Eles incluem:
+
+- **S**: Single Responsibility Principle (Princípio da Responsabilidade Única)
+- **O**: Open/Closed Principle (Princípio do Aberto/Fechado)
+- **L**: Liskov Substitution Principle (Princípio da Substituição de Liskov)
+- **I**: Interface Segregation Principle (Princípio da Segregação de Interfaces)
+- **D**: Dependency Inversion Principle (Princípio da Inversão de Dependência)
+
+### DDD (Domain-Driven Design)
+
+O DDD é uma abordagem que foca na modelagem do domínio da aplicação. Ele promove a colaboração entre especialistas do domínio e desenvolvedores para criar um modelo que reflita a lógica de negócios.
+
+### Clean Architecture
+
+A Clean Architecture é um padrão que separa a lógica de negócios da infraestrutura, permitindo que a aplicação seja independente de frameworks e tecnologias. Isso facilita a manutenção e a evolução do sistema.
+
+### Ports and Adapters
+
+O padrão Ports and Adapters (também conhecido como Arquitetura Hexagonal) permite que a aplicação se comunique com o mundo exterior (como bancos de dados, APIs, etc.) através de portas e adaptadores. Isso promove a testabilidade e a flexibilidade.
+
+### Arquitetura Hexagonal
+
+A Arquitetura Hexagonal é uma forma de estruturar a aplicação de modo que a lógica de negócios esteja no centro, cercada por interfaces que permitem a comunicação com o exterior. Isso facilita a troca de implementações sem afetar a lógica central.
+
+## Links Úteis
+
+- [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
+- [Domain-Driven Design](https://martinfowler.com/tags/domain%20driven%20design.html)
+- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/TheCleanArchitecture.html)
+- [Ports and Adapters](https://martinfowler.com/bliki/PortsAndAdapters.html)
+- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture)
+
 
 ## 🏗️ Arquitetura
 
@@ -47,7 +131,6 @@ O projeto segue os princípios da Arquitetura Limpa, com separação clara de re
 
 - **Padrão Mediator**: Para baixo acoplamento entre componentes
 - **API Minimalista**: Utilizando a abordagem de API minimalista do ASP.NET Core para endpoints leves
-- **Entity Framework Core**: Para persistência de dados (se utilizado)
 
 ##   Começando
 
@@ -61,7 +144,7 @@ O projeto segue os princípios da Arquitetura Limpa, com separação clara de re
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seuusuario/bank-api.git
+   git clone https://github.com/luisfabiosm/POC-MyBank.git
    cd bank-api
    ```
 
@@ -74,13 +157,7 @@ O projeto segue os princípios da Arquitetura Limpa, com separação clara de re
    ```bash
    dotnet build
    ```
-
-4. Atualize o banco de dados (se estiver usando migrações do Entity Framework):
-   ```bash
-   dotnet ef database update
-   ```
-
-5. Execute a aplicação:
+4. Execute a aplicação:
    ```bash
    dotnet run --project src/Adapters.Inbound.WebApi.Bank
    ```
@@ -91,21 +168,27 @@ A aplicação utiliza o sistema de configuração padrão do ASP.NET Core. As co
 
 ```json
 {
-  "Logging": {
+    "Logging": {
     "LogLevel": {
       "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
+      "Microsoft.AspNetCore": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
     }
   },
-  "AllowedHosts": "*",
-  "JwtSettings": {
-    "Key": "SuaChaveSuperSecretaAquiFiqueLongaEComplexaParaSerSegura",
-    "Issuer": "BankAPI",
-    "Audience": "BankAPIClients",
-    "DurationInMinutes": 120
+  "Jwt": {
+    "Key": "suachaveaqui",
+    "Issuer": "MyBank",
+    "Audience": "MyBankClient"
   },
-  "ConnectionStrings": {
-    "DefaultConnection": "Server=seu-servidor;Database=BankDB;User Id=seu-usuario;Password=sua-senha;"
+  "AllowedHosts": "*",
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "System": "Warning"
+      }
+    }
   }
 }
 ```
@@ -114,8 +197,45 @@ A aplicação utiliza o sistema de configuração padrão do ASP.NET Core. As co
 
 A API está totalmente documentada usando Swagger. Quando executada em modo de desenvolvimento, acesse a interface Swagger em:
 ```
-https://localhost:5001/swagger
+https://localhost:7294/swagger
 ```
+
+### Dados Mocados
+
+Usuário Cliente:
+
+    Cpf = "97786149031",
+    Name = "LUIZ NONO SILVA",
+    AccessPassword = "07122526",
+    CardPassword = "0321",
+    PhoneNumber = "91985758797"
+
+
+Conta 1:
+
+    BankNumber = 1,
+    AgencyNumber = 1,
+    AccountNumber = "25202",
+    Cpf = "97786149031",
+    Balance = 10000.53m,
+    PixKeys =
+    {
+     PixKey { Key = "97786149031", Type = Cpf },
+     PixKey { Key = "91985758797", Type = Phone }
+    }
+
+
+Conta 2 (externa)
+
+    BankNumber = 2,
+    AgencyNumber = 21,
+    AccountNumber = "2547719",
+    Cpf = "62566610282",
+    PixKeys = 
+    {
+     PixKey { Key = "62566610282", Type = Cpf },
+     PixKey { Key = "91981155731", Type = Phone }
+    }
 
 ### Autenticação
 
