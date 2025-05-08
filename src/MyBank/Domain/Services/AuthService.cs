@@ -65,7 +65,7 @@ namespace Domain.Services
                 return null;
             }
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? "YourSecretKeyHereAtLeast128BitsLong"));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? "3C8p@N1J8t$R#V7Y$Z2qsT7UxW1ac0cD"));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
@@ -76,8 +76,8 @@ namespace Domain.Services
             };
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["Jwt:Issuer"] ?? "BancoAPI",
-                audience: _configuration["Jwt:Audience"] ?? "BancoAPIClient",
+                issuer: _configuration["Jwt:Issuer"] ?? "MyBank",
+                audience: _configuration["Jwt:Audience"] ?? "MyBankClient",
                 claims: claims,
                 expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: credentials
