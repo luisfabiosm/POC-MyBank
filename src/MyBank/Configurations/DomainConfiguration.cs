@@ -5,8 +5,13 @@ using Domain.Core.Interfaces.Domain;
 using Domain.Core.Mediator;
 using Domain.Core.Models.Response;
 using Domain.Services;
-using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+using Domain.UseCases.Accounts.GetBalance;
+using Domain.UseCases.Accounts.GetStatement;
+using Domain.UseCases.PIX.GetPixKey;
+using Domain.UseCases.PIX.InitiatePixPayment;
+using Domain.UseCases.Security.AuthTransaction;
+using Domain.UseCases.Security.LoginAccount;
+
 
 namespace Configurations 
 {
@@ -19,20 +24,24 @@ namespace Configurations
 
             //#region Domain MediatoR
 
-            //services.AddTransient<BSMediator>();
-            //services.AddTransient<IBSRequestHandler<TransactionGetSampleTask, BaseReturn<ResponseGetSampleTask>>, UseCaseGetSampleTask>(); //PARA CADA USECASE HANDLER
-            //services.AddTransient<IBSRequestHandler<TransactionAddSampleTask, BaseReturn<ResponseNewSampleTask>>, UseCaseAddSampleTask>(); //PARA CADA USECASE HANDLER
-            //services.AddTransient<IBSRequestHandler<TransactionUpdateSampleTaskTimer, BaseReturn<bool>>, UseCaseUpdateSampleTaskTimer>(); //PARA CADA USECASE HANDLER
-            //services.AddTransient<IBSRequestHandler<TransactionListSampleTask, BaseReturn<ResponseListSampleTask>>, UseCaseListSampleTask>(); //PARA CADA USECASE HANDLER
-
+            services.AddTransient<BSMediator>();
+            services.AddTransient<IBSRequestHandler<TransactionLoginAccount, BaseReturn<LoginResponse>>, UseCaseLoginAccountTransaction>(); //PARA CADA USECASE HANDLER
+            services.AddTransient<IBSRequestHandler<TransactionAuthTransaction, BaseReturn<AuthTransactionResponse>>, UseCaseAuthTransaction>(); //PARA CADA USECASE HA                                                                                                                                                 
+            services.AddTransient<IBSRequestHandler<TransactionGetPixKey, BaseReturn<PixKeyResponse>>, UseCaseGetPixKey>(); //PARA CADA USECASE HANDLER
+            services.AddTransient<IBSRequestHandler<TransactionInitiatePixPayment, BaseReturn<PixPayResponse>>, UseCaseInitiatePixPayment>(); //PARA CADA USECASE HANDLER
+            services.AddTransient<IBSRequestHandler<TransactionGetBalance, BaseReturn<BalanceResponse>>, UseCaseGetBalance>(); //PARA CADA USECASE HANDLER
+            services.AddTransient<IBSRequestHandler<TransactionGetStatement, BaseReturn<StatementResponse>>, UseCaseGetStatement>(); //PARA CADA USECASE HANDLER
+            
             //#endregion
 
 
-            //#region Domain Services
+            #region Domain Services
 
-            //services.AddScoped<ISampleService, SampleService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<IPixService, PixService>();
 
-            //#endregion
+            #endregion
 
 
 
