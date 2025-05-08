@@ -10,13 +10,13 @@ using System.Text.RegularExpressions;
 
 namespace Domain.UseCases.Security.GetToken
 {
-    public class UseCaseGetTokenTransaction : BaseUseCaseHandler<TransactionGetToken, BaseReturn<GetTokenResponse>, GetTokenResponse>
+    public class UseCaseGetToken : BaseUseCaseHandler<TransactionGetToken, BaseReturn<GetTokenResponse>, GetTokenResponse>
     {
 
         private readonly IAccountService _accountService;
         private readonly IAuthService _authService;
 
-        public UseCaseGetTokenTransaction(IServiceProvider serviceProvider) : base(serviceProvider)
+        public UseCaseGetToken(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             _accountService = serviceProvider.GetRequiredService<IAccountService>();
             _authService = serviceProvider.GetRequiredService<IAuthService>();
