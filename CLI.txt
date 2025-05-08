@@ -1,0 +1,92 @@
+# Installing and Using Your .NET Template
+
+## Installation
+
+To make your template available for use with the `dotnet new` command, you need to install it as a custom template. Follow these steps:
+
+1. **Navigate to your template directory** (where the `.template.config` folder is located)
+
+2. **Install the template locally:**
+   ```bash
+   dotnet new install ./
+   ```
+
+   You should see output confirming the template has been installed.
+
+3. **Verify the installation:**
+   ```bash
+   dotnet new list
+   ```
+   
+   Look for your template in the list of available templates.
+
+## Using Your Template
+
+Once installed, you can use your template to create new projects with various options:
+
+### Basic Usage
+
+```bash
+dotnet new mybank -n MyMicroservice
+```
+
+### With Options
+
+```bash
+# Choose a database type
+dotnet new mybank -n MyMicroservice --database-type mongodb
+
+# Include messaging options
+dotnet new mybank -n MyMicroservice --use-kafka --use-rabbitmq
+
+# Set version
+dotnet new mybank -n MyMicroservice --version 2.0.0
+
+# Skip automatic restore
+dotnet new mybank -n MyMicroservice --no-restore
+```
+
+### Using Short Names
+
+```bash
+dotnet new mybank -n MyMicroservice --db mongodb --kafka --rmq --metrics
+```
+
+## Troubleshooting
+
+If you encounter issues after creating a project from your template:
+
+1. **Check the project structure** to ensure all files are correctly created
+
+2. **Manually restore packages** if automatic restore failed:
+   ```bash
+   cd MyMicroservice
+   dotnet restore
+   ```
+
+3. **Debug template processing** by using the verbose flag:
+   ```bash
+   dotnet new mybank -n MyMicroservice --debug:reinit
+   ```
+
+4. **Uninstall and reinstall** the template if necessary:
+   ```bash
+   dotnet new uninstall mybank
+   dotnet new install ./
+   ```
+
+## Updating Your Template
+
+If you make changes to your template:
+
+1. **Uninstall the existing template:**
+   ```bash
+   dotnet new uninstall mybank
+   ```
+
+2. **Install the updated template:**
+   ```bash
+   dotnet new install ./
+   ```
+
+This will ensure your changes are applied when creating new projects.

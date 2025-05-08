@@ -1,0 +1,79 @@
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using Adapters.Outbound.Database.InMemory;
+using Domain.Core.Interfaces.Domain;
+using Domain.Core.Models.Response;
+using Microsoft.IdentityModel.Tokens;
+
+namespace Domain.Services
+{
+    public class AuthService: IAuthService
+    {
+        private readonly InMemoryDatabase _database;
+        private readonly IConfiguration _configuration;
+
+        public AuthService(InMemoryDatabase database, IConfiguration configuration)
+        {
+            _database = database;
+            _configuration = configuration;
+        }
+
+        public async Task<LoginResponse?> AuthenticateAsync(string cpf, string password)
+        {
+            var user = await _database.GetUserByCpfAsync(cpf);
+            if (user == null || user.AccessPassword != password)
+            {
+                return null;
+            }
+
+            var account = await _database.GetAccountByCpfAsync(cpf);
+            if (account == null)
+            {
+                return null;
+            }
+
+            var token = GenerateJwtToken(user.Cpf, user.Name);
+
+            return new LoginResponse
+            {
+                Token = token,
+                Expiration = DateTime.UtcNow.AddHours(1),
+                Name = user.Name,
+                Cpf = user.Cpf,
+                AgencyNumber = account.AgencyNumber,
+                AccountNumber = account.AccountNumber
+            };
+        }
+
+        public string GenerateJwtToken(string cpf, string name)
+        {
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? "YourSecretKeyHereAtLeast128BitsLong"));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, cpf),
+                new Claim(JwtRegisteredClaimNames.Name, name),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            };
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["Jwt:Issuer"] ?? "BancoAPI",
+                audience: _configuration["Jwt:Audience"] ?? "BancoAPIClient",
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: credentials
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        public async Task<bool> ValidateCardPasswordAsync(string cpf, string cardPassword)
+        {
+            var user = _database.GetUserByCpfAsync(cpf).Result;
+            return user != null && user.CardPassword == cardPassword;
+        }
+    }
+}
+

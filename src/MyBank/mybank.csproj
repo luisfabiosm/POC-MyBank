@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>553e1aa7-c5fa-4900-8c7a-0ab4e69488fe</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DefineConstants>SqlServerCondition PSQLCondition MongoDbCondition</DefineConstants>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <Version>1.0.0</Version>
+    <RootNamespace />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Adapters\Outbound\Messaging\**" />
+    <Compile Remove="Domain\Core\Interfaces\Inbound\**" />
+    <Content Remove="Adapters\Outbound\Messaging\**" />
+    <Content Remove="Domain\Core\Interfaces\Inbound\**" />
+    <EmbeddedResource Remove="Adapters\Outbound\Messaging\**" />
+    <EmbeddedResource Remove="Domain\Core\Interfaces\Inbound\**" />
+    <None Remove="Adapters\Outbound\Messaging\**" />
+    <None Remove="Domain\Core\Interfaces\Inbound\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1-Preview.1" />
+    <PackageReference Include="OpenTelemetry.Exporter.Console" Version="1.11.2" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.11.1" />
+    <PackageReference Include="Serilog.Enrichers.Span" Version="3.1.0" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="9.0.1" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.1-dev-02317" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.1-dev-00953" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0-dev-02301" />
+    <PackageReference Include="Serilog.Sinks.OpenTelemetry" Version="4.2.0-dev-02302" />
+
+    <!-- OpenTelemetry Packages -->
+    <PackageReference Include="OpenTelemetry" Version="1.11.2" />
+    <PackageReference Include="OpenTelemetry.Api" Version="1.11.2" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.11.2" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.11.2" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.11.1" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.11.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.9.0" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.6.3" />
+  </ItemGroup>
+
+
+
+
+</Project>
