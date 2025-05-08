@@ -13,5 +13,7 @@ namespace Domain.Core.Interfaces.Domain
         Task AddTransactionAsync(string cpf, BankTransaction transaction);
         Task<User> GetUser(int agency, string accountNumber);
 
+        Task<User> GetUserbyCpfAsync(string cpf);
+
     }
 }

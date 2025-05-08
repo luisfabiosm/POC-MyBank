@@ -6,6 +6,7 @@ using Domain.UseCases.Accounts.GetStatement;
 using Domain.UseCases.PIX.GetPixKey;
 using Domain.UseCases.PIX.InitiatePixPayment;
 using Domain.UseCases.Security.AuthTransaction;
+using Domain.UseCases.Security.GetToken;
 using Domain.UseCases.Security.LoginAccount;
 using System.Linq.Expressions;
 
@@ -74,12 +75,23 @@ namespace Adapters.Inbound.WebApi.Bank.Mapping
         }
 
 
-        
         public TransactionLoginAccount ToTransactionLoginAccount(LoginRequest request)
         {
             try
             {
                 return new TransactionLoginAccount(request.Cpf, request.Password);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public TransactionGetToken ToTransactionGetToken(GetTokenRequest request)
+        {
+            try
+            {
+                return new TransactionGetToken(request.Cpf, request.Password);
             }
             catch (Exception)
             {

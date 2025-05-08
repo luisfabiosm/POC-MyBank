@@ -54,9 +54,18 @@ namespace Domain.Services
         }
 
 
-        public Task<User> GetUser(int agency, string accountNumber)
+        public async Task<User> GetUserbyCpfAsync(string cpf)
         {
-            throw new NotImplementedException();
+            var _user = await _database.GetUserByCpfAsync(cpf);
+            return _user;
+        }
+
+        public async Task<User> GetUser(int agency, string accountNumber)
+        {
+            var _account = await _database.GetAccountAsync(agency, accountNumber);
+
+            var _user = await _database.GetUserByCpfAsync(_account.Cpf);
+            return _user;
         }
     }
 }

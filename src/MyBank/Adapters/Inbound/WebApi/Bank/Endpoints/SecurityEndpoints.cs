@@ -3,6 +3,7 @@ using Domain.Core.Base;
 using Domain.Core.Mediator;
 using Domain.Core.Models.Request;
 using Domain.Core.Models.Response;
+using Domain.UseCases.Security.GetToken;
 using Domain.UseCases.Security.LoginAccount;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,16 +49,15 @@ namespace Adapters.Inbound.WebApi.Bank.Endpoints
                 [FromServices] MappingHttpRequestToTransaction mapping
                 ) =>
             {
-                //string cpfOnlyNumbers = new string(request.Cpf.Where(char.IsDigit).ToArray());
+                string correlationId = Guid.NewGuid().ToString();
+                var transaction = mapping.ToTransactionGetToken(request);
 
-                //var result = await authenticateUser.ExecuteAsync(cpfOnlyNumbers, request.Password);
+                var _result = await bSMediator.Send<TransactionGetToken, BaseReturn<GetTokenResponse>>(transaction);
 
-                //if (result == null)
-                //{
-                //    return Results.Unauthorized();
-                //}
+                if (!_result.Success)
+                    _result.ThrowIfError();
 
-                //return Results.Ok(new { token = result.Token, expiration = result.Expiration });
+                return Results.Ok(_result.Data);
             })
            .WithName("GerarToken")
            .WithDescription("Gera um novo token JWT para acesso à API")

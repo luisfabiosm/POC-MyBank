@@ -33,7 +33,7 @@ namespace Domain.Services
                 return null;
             }
 
-            var token = GenerateJwtToken(user.Cpf, user.Name);
+            var token = await GenerateJwtToken(user.Cpf, password,  user.Name);
 
             return new LoginResponse
             {
@@ -46,8 +46,25 @@ namespace Domain.Services
             };
         }
 
-        public string GenerateJwtToken(string cpf, string name)
+
+        public async Task<GetTokenResponse> GenerateJwtTokenAsync(string cpf, string password, string name)
         {
+
+            var _jwtToken = await GenerateJwtToken(cpf, password, name);
+
+            return new GetTokenResponse(_jwtToken, DateTime.UtcNow.AddHours(1));
+        }
+
+
+        private async Task<string> GenerateJwtToken(string cpf, string password, string name)
+        {
+
+            var user = await _database.GetUserByCpfAsync(cpf);
+            if (user == null || user.AccessPassword != password)
+            {
+                return null;
+            }
+
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"] ?? "YourSecretKeyHereAtLeast128BitsLong"));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
@@ -65,6 +82,7 @@ namespace Domain.Services
                 expires: DateTime.UtcNow.AddHours(1),
                 signingCredentials: credentials
             );
+
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
