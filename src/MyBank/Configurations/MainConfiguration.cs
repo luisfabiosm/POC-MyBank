@@ -14,7 +14,6 @@ namespace Configurations
             AppSettings appSettings = new();
             configuration.GetSection("AppSettings").Bind(appSettings);
 
-            services.AddJwtAuthentication(configuration);
             services.ConfigureInboundAdapters(configuration);
             services.ConfigureOutboundAdapters(configuration);
             services.ConfigureDomainAdapters(configuration);

@@ -18,8 +18,7 @@ namespace Adapters.Inbound.WebApi.Extensions
             services.AddScoped<MappingHttpRequestToTransaction>();
             services.AddEndpointsApiExplorer();
             services.AddHealthChecks();
-
-           // services.AddJwtAuthentication(configuration);
+            services.AddJwtAuthentication(configuration);
 
             services.AddCors(options =>
             {
