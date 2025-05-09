@@ -23,14 +23,17 @@ namespace Adapters.Inbound.WebApi.Bank.Endpoints
               .RequireAuthorization();
 
             // Endpoint 5: Consulta Chave PIX
-            group.MapGet("/keys", async (
-                [FromBody]PixGetKeyRequest request,
+            group.MapGet("/keys/{PixKey}/{KeyType}", async (
+                string PixKey, int KeyType,
                 [FromServices] BSMediator bSMediator,
                 [FromServices] MappingHttpRequestToTransaction mapping
                 ) =>
             {
                 string correlationId = Guid.NewGuid().ToString();
-                var transaction = mapping.ToTransactionGetPixKey(request);
+
+                var _request = new PixGetKeyRequest(PixKey, KeyType);
+
+                var transaction = mapping.ToTransactionGetPixKey(_request);
                 var _result = await bSMediator.Send<TransactionGetPixKey, BaseReturn<PixKeyResponse>>(transaction);
 
                 if (!_result.Success)
