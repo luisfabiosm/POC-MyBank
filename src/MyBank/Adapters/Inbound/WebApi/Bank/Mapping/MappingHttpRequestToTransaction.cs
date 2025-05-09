@@ -54,7 +54,13 @@ namespace Adapters.Inbound.WebApi.Bank.Mapping
         {
             try
             {
-                return new TransactionInitiatePixPayment(new ExternalAccount(request.Bank, request.AgencyNumber, request.AccountNumber, request.Cpf),request.Amount);
+                return new TransactionInitiatePixPayment(
+                    request.SourceBankNumber,
+                    request.SourceAgencyNumber,
+                    request.SourceAccountNumber,
+                    request.Account2,
+                    request.Amount,
+                    request.Description);
             }
             catch (Exception)
             {

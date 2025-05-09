@@ -9,9 +9,8 @@ namespace Domain.Core.Models.Response
     {
 
        
-        public ExternalAccount Account2;
-        public string Key { get; set; } = string.Empty;
-
+        public ExternalAccount Account2 { get; set; }
+        public string Key { get; set; }
 
         public PixKeyResponse(ExternalAccount account, TransactionGetPixKey transaction)
         {

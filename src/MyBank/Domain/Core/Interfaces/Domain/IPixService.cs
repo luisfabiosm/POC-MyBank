@@ -2,6 +2,7 @@
 using Domain.Core.Enums;
 using Domain.Core.Models.Request;
 using Domain.Core.Models.Response;
+using Domain.UseCases.PIX.InitiatePixPayment;
 
 namespace Domain.Core.Interfaces.Domain
 {
@@ -10,7 +11,7 @@ namespace Domain.Core.Interfaces.Domain
         Task<List<PixKey>> GetPixKeysAsync(string cpf);
 
         Task<ExternalAccount> EvaluatePixKeysAsync(string key, PixKeyType type);
-        Task<PixPayResponse> InitiatePixTransferAsync(Account account1, PixPayRequest request);
+        Task<PixPayResponse> InitiatePixTransferAsync(Account sourceAccout, TransactionInitiatePixPayment transaction);
         Task<bool> ConfirmPixTransferAsync(string cpf, Guid transactionId);
     }
 }

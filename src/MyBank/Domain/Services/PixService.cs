@@ -1,9 +1,11 @@
 ﻿using Adapters.Outbound.Database.InMemory;
 using Domain.Core.Entity;
 using Domain.Core.Enums;
+using Domain.Core.Exceptions;
 using Domain.Core.Interfaces.Domain;
 using Domain.Core.Models.Request;
 using Domain.Core.Models.Response;
+using Domain.UseCases.PIX.InitiatePixPayment;
 using Microsoft.IdentityModel.Tokens;
 using System.Transactions;
 
@@ -42,45 +44,38 @@ namespace Domain.Services
             return _account;
         }
 
-        public async Task<PixPayResponse> InitiatePixTransferAsync(Account account1, PixPayRequest request)
+        public async Task<PixPayResponse> InitiatePixTransferAsync(Account sourceAccount, TransactionInitiatePixPayment transaction)
         {
             
 
-            if (account1 == null)
+            if (sourceAccount == null)
             {
-                return new PixPayResponse
-                {
-                    Message = "Conta não encontrada",
-                    RequiresAuthentication = false
-                };
+                throw new BusinessException("Conta origem não encontrada.");
             }
 
-            if (account1.Balance < request.Amount)
+            if (sourceAccount.Balance < transaction.Amount)
             {
-                return new PixPayResponse
-                {
-                    Message = "Saldo insuficiente",
-                    RequiresAuthentication = false
-                };
+                throw new BusinessException("Saldo insuficiente.");
+
             }
 
             // Criar transação pendente
-            var transaction = new BankTransaction
+            var bankTransaction = new BankTransaction
             {
                 Id = Guid.NewGuid(),
                 Date = DateTime.Now,
-                Amount = request.Amount,
-                Description = request.Description,
+                Amount = transaction.Amount,
+                Description = transaction.Description,
                 Type = TransactionType.PixSent,
                 DestinationAccount = "Destinatário PIX"
             };
 
             // Simular necessidade de autenticação para transações acima de R$ 1.000
-            bool requiresAuth = request.Amount > 1000;
+            bool requiresAuth = transaction.Amount > 1000;
 
             if (!requiresAuth)
             {
-                await _database.ExecuteTransactionAsync(account1.Cpf, transaction);
+                await _database.ExecuteTransactionAsync(sourceAccount.Cpf, transaction);
                 return new PixPayResponse
                 {
                     TransactionId = transaction.Id,
@@ -90,7 +85,7 @@ namespace Domain.Services
             }
             else
             {
-                await _database.AddPendingTransactionAsync(account1.Cpf, transaction);
+                await _database.AddPendingTransactionAsync(sourceAccount.Cpf, transaction);
                 return new PixPayResponse
                 {
                     TransactionId = transaction.Id,
