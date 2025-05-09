@@ -111,12 +111,25 @@ A Arquitetura Hexagonal é uma forma de estruturar a aplicação de modo que a l
 
 ## Links Úteis
 
-- [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
-- [Domain-Driven Design](https://martinfowler.com/tags/domain%20driven%20design.html)
-- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/TheCleanArchitecture.html)
-- [Ports and Adapters](https://martinfowler.com/bliki/PortsAndAdapters.html)
-- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture)
+- [SOLID Principles - Medium](- [SOLID Principles](https://medium.com/desenvolvendo-com-paixao/o-que-%C3%A9-solid-o-guia-completo-para-voc%C3%AA-entender-os-5-princ%C3%ADpios-da-poo-2b937b3fc530)
+- [SOLID Principles - Alura](https://www.alura.com.br/artigos/solid)
+- [SOLID Principles - Video: Código Fonte](https://www.youtube.com/watch?v=mkx0CdWiPRA&t=108s)
 
+- [Domain-Driven Design - Martin Fowler](https://martinfowler.com/tags/domain%20driven%20design.html)
+- [Domain-Driven Design - FullCycle](https://fullcycle.com.br/domain-driven-design/)
+- [Domain-Driven Design - Video: Eximia.co playlist](https://www.youtube.com/watch?v=2X9Q97u4tUg&list=PLkpjQs-GfEMN8CHp7tIQqg6JFowrIX9ve)
+
+- [Clean Architecture - Medium](https://medium.com/@gabrielfernandeslemos/clean-architecture-uma-abordagem-baseada-em-princ%C3%ADpios-bf9866da1f9c)
+- [Clean Architecture - FullCycle](https://fullcycle.com.br/o-que-e-clean-architecture/)
+- [Clean Architecture - Video: Código Fonte](https://www.youtube.com/watch?v=ow8UUjS5vzU&t=4s)
+
+- [Ports and Adapters](https://martinfowler.com/bliki/PortsAndAdapters.html)
+- [Ports and Adapters](https://martinfowler.com/bliki/PortsAndAdapters.html)
+- [Ports and Adapters](https://martinfowler.com/bliki/PortsAndAdapters.html)
+
+- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture)
+- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture)
+- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture)
 
 ## 🏗️ Arquitetura
 
