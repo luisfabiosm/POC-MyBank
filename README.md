@@ -111,7 +111,7 @@ A Arquitetura Hexagonal é uma forma de estruturar a aplicação de modo que a l
 
 ## Links Úteis
 
-- [SOLID Principles - Medium](- [SOLID Principles](https://medium.com/desenvolvendo-com-paixao/o-que-%C3%A9-solid-o-guia-completo-para-voc%C3%AA-entender-os-5-princ%C3%ADpios-da-poo-2b937b3fc530)
+- [SOLID Principles - Medium](https://medium.com/desenvolvendo-com-paixao/o-que-%C3%A9-solid-o-guia-completo-para-voc%C3%AA-entender-os-5-princ%C3%ADpios-da-poo-2b937b3fc530)
 - [SOLID Principles - Alura](https://www.alura.com.br/artigos/solid)
 - [SOLID Principles - Video: Código Fonte](https://www.youtube.com/watch?v=mkx0CdWiPRA&t=108s)
 
@@ -123,13 +123,13 @@ A Arquitetura Hexagonal é uma forma de estruturar a aplicação de modo que a l
 - [Clean Architecture - FullCycle](https://fullcycle.com.br/o-que-e-clean-architecture/)
 - [Clean Architecture - Video: Código Fonte](https://www.youtube.com/watch?v=ow8UUjS5vzU&t=4s)
 
-- [Ports and Adapters](https://martinfowler.com/bliki/PortsAndAdapters.html)
-- [Ports and Adapters](https://martinfowler.com/bliki/PortsAndAdapters.html)
-- [Ports and Adapters](https://martinfowler.com/bliki/PortsAndAdapters.html)
+- [Ports and Adapters - Medium](https://medium.com/bemobi-tech/ports-adapters-architecture-ou-arquitetura-hexagonal-b4b9904dad1a)
+- [Ports and Adapters - Dev.to](https://dev.to/wsantosdev/design-ports-and-adapters-48mi)
+- [Ports and Adapters - Code Soapbox](https://codesoapbox.dev/ports-adapters-aka-hexagonal-architecture-explained/)
 
-- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture)
-- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture)
-- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture)
+- [Arquitetura Hexagonal - Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture)
+- [Arquitetura Hexagonal - Medium](https://alexalvess.medium.com/organizando-seu-projeto-net-com-arquitetura-hexagonal-parte-02-fe9a8ed6ab02)
+- [Arquitetura Hexagonal - Medium](https://devcookies.medium.com/a-detailed-guide-to-hexagonal-architecture-with-examples-042523acb1db)
 
 ## 🏗️ Arquitetura
 
