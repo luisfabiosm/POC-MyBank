@@ -6,7 +6,7 @@ using Adapters.Outbound.Logging;
 using Adapters.Outbound.Metrics;
 
 namespace Configurations
-{ 
+{
     public static class OutboundConfiguration
     {
         public static IServiceCollection ConfigureOutboundAdapters(this IServiceCollection services, IConfiguration configuration)
@@ -35,6 +35,13 @@ namespace Configurations
 
 
             return services;
+        }
+
+
+        public static void InitializeInMemoryDatabase(this WebApplication app)
+        {
+            var dbContext = app.Services.GetRequiredService<InMemoryDatabase>();
+            dbContext.Initialize();
         }
     }
 }

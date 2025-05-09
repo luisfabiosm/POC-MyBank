@@ -20,18 +20,21 @@ namespace Adapters.Inbound.WebApi.Bank.Endpoints
         public static void AddAccountEndpoints(this WebApplication app)
         {
 
-            var group = app.MapGroup("/api/account")
+            var group = app.MapGroup("/api/account/")
                          .WithTags("Conta")
                          .RequireAuthorization();
 
-            group.MapGet("/balance", async (
-                [FromBody] AccountRequest request,
+            group.MapGet("/balance/{BankNumber}/{AgencyNumber}/{AccountNumber}", async (
+                //AccountRequest request,
+                int BankNumber, int AgencyNumber, string AccountNumber,
                 [FromServices] BSMediator bSMediator,
                 [FromServices] MappingHttpRequestToTransaction mapping
                 ) =>
             {
+                var _request = new AccountRequest(BankNumber, AgencyNumber, AccountNumber);
+
                 string correlationId = Guid.NewGuid().ToString();
-                var transaction = mapping.ToTransactionGetBalance(request);
+                var transaction = mapping.ToTransactionGetBalance(_request);
                 var _result = await bSMediator.Send<TransactionGetBalance, BaseReturn<BalanceResponse>>(transaction);
 
                 if (!_result.Success)
@@ -45,14 +48,15 @@ namespace Adapters.Inbound.WebApi.Bank.Endpoints
             .Produces(StatusCodes.Status401Unauthorized);
 
 
-            group.MapGet("/statement", async (
-                [FromBody] AccountRequest request,
+            group.MapGet("/statement/{BankNumber}/{AgencyNumber}/{AccountNumber}", async (
+                int BankNumber, int AgencyNumber, string AccountNumber,
                 [FromServices] BSMediator bSMediator,
                 [FromServices] MappingHttpRequestToTransaction mapping
                 ) =>
             {
+                var _request = new AccountRequest(BankNumber,AgencyNumber, AccountNumber);
                 string correlationId = Guid.NewGuid().ToString();
-                var transaction = mapping.ToTransactionGetStatement(request);
+                var transaction = mapping.ToTransactionGetStatement(_request);
                 var _result = await bSMediator.Send<TransactionGetStatement, BaseReturn<StatementResponse>>(transaction);
 
                 if (!_result.Success)

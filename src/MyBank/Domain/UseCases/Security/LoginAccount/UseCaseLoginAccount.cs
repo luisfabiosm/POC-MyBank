@@ -8,14 +8,12 @@ using Domain.UseCases.Security.AuthTransaction;
 
 namespace Domain.UseCases.Security.LoginAccount
 {
-    public class UseCaseLoginAccountTransaction : BaseUseCaseHandler<TransactionLoginAccount, BaseReturn<LoginResponse>, LoginResponse>
+    public class UseCaseLoginAccount : BaseUseCaseHandler<TransactionLoginAccount, BaseReturn<LoginResponse>, LoginResponse>
     {
         private readonly IAuthService _authService;
-        private readonly IAccountService _accountService;
-        public UseCaseLoginAccountTransaction(IServiceProvider serviceProvider) : base(serviceProvider)
+        public UseCaseLoginAccount(IServiceProvider serviceProvider) : base(serviceProvider)
         {
             _authService = serviceProvider.GetRequiredService<IAuthService>();
-            _accountService = serviceProvider.GetRequiredService<IAccountService>();
         }
 
 
@@ -39,12 +37,12 @@ namespace Domain.UseCases.Security.LoginAccount
         {
             try
             {
-                var _account = await _accountService.GetAccountByCpfAsync(transaction.Cpf);
-
-                if (_account is null)
-                    throw new BusinessException("Falha no Login. Usuário inexistente");
 
                 var _result = await _authService.AuthenticateAsync(transaction.Cpf, transaction.Password);
+
+                if (_result is null)
+                    throw new BusinessException("Falha no Login");
+
 
                 return _result;
             }

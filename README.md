@@ -111,12 +111,25 @@ A Arquitetura Hexagonal é uma forma de estruturar a aplicação de modo que a l
 
 ## Links Úteis
 
-- [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)
-- [Domain-Driven Design](https://martinfowler.com/tags/domain%20driven%20design.html)
-- [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/TheCleanArchitecture.html)
-- [Ports and Adapters](https://martinfowler.com/bliki/PortsAndAdapters.html)
-- [Hexagonal Architecture](https://en.wikipedia.org/wiki/Hexagonal_architecture)
+- [SOLID Principles - Medium](https://medium.com/desenvolvendo-com-paixao/o-que-%C3%A9-solid-o-guia-completo-para-voc%C3%AA-entender-os-5-princ%C3%ADpios-da-poo-2b937b3fc530)
+- [SOLID Principles - Alura](https://www.alura.com.br/artigos/solid)
+- [SOLID Principles - Video: Código Fonte](https://www.youtube.com/watch?v=mkx0CdWiPRA&t=108s)
 
+- [Domain-Driven Design - Martin Fowler](https://martinfowler.com/tags/domain%20driven%20design.html)
+- [Domain-Driven Design - FullCycle](https://fullcycle.com.br/domain-driven-design/)
+- [Domain-Driven Design - Video: Eximia.co playlist](https://www.youtube.com/watch?v=2X9Q97u4tUg&list=PLkpjQs-GfEMN8CHp7tIQqg6JFowrIX9ve)
+
+- [Clean Architecture - Medium](https://medium.com/@gabrielfernandeslemos/clean-architecture-uma-abordagem-baseada-em-princ%C3%ADpios-bf9866da1f9c)
+- [Clean Architecture - FullCycle](https://fullcycle.com.br/o-que-e-clean-architecture/)
+- [Clean Architecture - Video: Código Fonte](https://www.youtube.com/watch?v=ow8UUjS5vzU&t=4s)
+
+- [Ports and Adapters - Medium](https://medium.com/bemobi-tech/ports-adapters-architecture-ou-arquitetura-hexagonal-b4b9904dad1a)
+- [Ports and Adapters - Dev.to](https://dev.to/wsantosdev/design-ports-and-adapters-48mi)
+- [Ports and Adapters - Code Soapbox](https://codesoapbox.dev/ports-adapters-aka-hexagonal-architecture-explained/)
+
+- [Arquitetura Hexagonal - Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture)
+- [Arquitetura Hexagonal - Medium](https://alexalvess.medium.com/organizando-seu-projeto-net-com-arquitetura-hexagonal-parte-02-fe9a8ed6ab02)
+- [Arquitetura Hexagonal - Medium](https://devcookies.medium.com/a-detailed-guide-to-hexagonal-architecture-with-examples-042523acb1db)
 
 ## 🏗️ Arquitetura
 

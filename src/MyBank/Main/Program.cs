@@ -1,4 +1,5 @@
 using Adapters.Inbound.WebApi.Extensions;
+using Adapters.Outbound.Database.InMemory;
 using Configurations;
 using System.Reflection;
 
@@ -21,4 +22,6 @@ Console.WriteLine($"Serviço: {Assembly.GetExecutingAssembly().GetName()} Versão:
 
 
 var app = builder.Build();
+
+app.InitializeInMemoryDatabase();
 app.UseMicroserviceExtensions();
