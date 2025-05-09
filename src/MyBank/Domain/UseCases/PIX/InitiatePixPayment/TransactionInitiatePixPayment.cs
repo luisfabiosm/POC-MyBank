@@ -4,24 +4,32 @@ using Domain.Core.Models.Response;
 
 namespace Domain.UseCases.PIX.InitiatePixPayment
 {
+
     public record TransactionInitiatePixPayment : BaseTransaction<BaseReturn<PixPayResponse>>
     {
-       public Account Account1 { get; set; }
-        public ExternalAccount Account2 { get; set; }
-
+        public int BankNumber { get; set; }
+        public int AgencyNumber { get; set; }
+        public string AccountNumber { get; set; } = string.Empty;
+        public ExternalAccount RemoteAccount { get; set; }
         public decimal Amount { get; set; }
+        public string Description { get; set; }
 
-        public TransactionInitiatePixPayment(ExternalAccount account2, decimal amount )
+        public TransactionInitiatePixPayment(int sourceBank, int sourceAgency, string sourceAccount, ExternalAccount remoteAccount, decimal amount, string descripition )
         {
-            this.Account2 = account2;
+            this.BankNumber = sourceBank;
+            this.AgencyNumber = sourceAgency;
+            this.AccountNumber = sourceAccount;
+
+            this.RemoteAccount = remoteAccount;
             this.Amount = amount;
+            this.Description = descripition;
         }
 
-        public TransactionInitiatePixPayment(Guid id, Account account1, ExternalAccount account2, decimal amount)
+        public TransactionInitiatePixPayment()
         {
-            this.Account1 = account1;
-            this.Account2 = account2;
-            this.Amount = amount;
+            
         }
+
+
     }
 }
